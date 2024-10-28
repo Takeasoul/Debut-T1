@@ -83,8 +83,8 @@ class CardMemberControllerTest {
     @WithMockUser(roles = "ADMIN")
     void getAllCardMembers_ShouldReturnListOfCardMembers() throws Exception {
         ModelListResponse<CardMemberResponse> response = ModelListResponse.<CardMemberResponse>builder()
-                .data(Arrays.asList(cardMemberResponse)) // Список участников
-                .totalCount(1L) // Общее количество участников
+                .data(Arrays.asList(cardMemberResponse))
+                .totalCount(1L)
                 .build();
 
         Mockito.when(cardMembersService.findAll(any(Pageable.class))).thenReturn(java.util.concurrent.CompletableFuture.completedFuture(response));
@@ -93,7 +93,7 @@ class CardMemberControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.data[0].id").value(cardMemberResponse.getId().toString()))
-                .andExpect(jsonPath("$.totalCount").value(1)); // Проверка общего количества
+                .andExpect(jsonPath("$.totalCount").value(1));
     }
 
     @Test
